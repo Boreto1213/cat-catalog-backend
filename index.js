@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 
 import emailRoutes from './routes/emails.js';
 import catRoutes from './routes/cats.js';
+import reviewRoutes from './routes/reviews.js';
 
 const app = express();
 dotenv.config();
@@ -16,6 +17,7 @@ app.use(cors());
 
 app.use("/cats", catRoutes);
 app.use("/emails", emailRoutes);
+app.use("/reviews", reviewRoutes);
 
 const PORT = process.env.PORT || 5000;
 

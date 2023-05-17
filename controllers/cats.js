@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import CatModel from "../models/catModel.js"
 
 export const getCats = async (req, res) => {
@@ -22,4 +23,29 @@ export const createCat = async (req, res) => {
     } catch (error) {
         res.status(409).json({ error });
     }
+}
+
+export const updateCat = async (req, res) => {
+    const { id: _id } = req.params;
+    const cat = req.body;
+
+    if (!mongoose.Types.ObjectId.isValid(_id)) {
+        return res.status(404).send('No cat that id!');
+    }
+
+    const updatedCat = await CatModel.findByIdAndUpdate(_id, cat, { new: true });
+
+    res.json(updatedCat);
+}
+
+export const deleteCat = async (req, rse) => {
+    const { id: _id  } = req.params;
+    
+    if (!mongoose.Types.ObjectId.isValid(_id)) {
+        return res.status(404).send('No cat that id!');
+    }
+
+    await CatModel.findByIdAndRemove(_id);
+
+    res.json({ message: 'Post deleted successfully!'});
 }

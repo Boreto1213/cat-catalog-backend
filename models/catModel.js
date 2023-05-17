@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 
-// Add unique id maybe...
 const catSchema = mongoose.Schema({
     name: String,
     age: String,
